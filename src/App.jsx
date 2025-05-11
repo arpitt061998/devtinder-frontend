@@ -1,14 +1,19 @@
-import { useState } from 'react'
-import Navbar from './components/Navbar'
+import Home from './components/Home'
+import { createBrowserRouter, RouterProvider } from 'react-router'
 
 function App() {
-  const [count, setCount] = useState(0)
 
+  const appRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <Home/>
+    },
+  ])
   return (
     <>
-      <Navbar/>
+      <RouterProvider route = {appRouter} />
     </>
   )
 }
 
-export default App
+export default App;
