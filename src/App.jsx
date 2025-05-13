@@ -1,19 +1,16 @@
-import Home from './components/Home'
-import { createBrowserRouter, RouterProvider } from 'react-router'
+import {Outlet} from 'react-router';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 function App() {
 
-  const appRouter = createBrowserRouter([
-    {
-      path: "/",
-      element: <Home/>
-    },
-  ])
   return (
     <>
-      <RouterProvider route = {appRouter} />
+      <Navbar/>
+      <Outlet/>
+      <Footer/>
     </>
-  )
-}
+  );
+};
 
 export default App;
