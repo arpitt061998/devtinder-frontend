@@ -1,12 +1,12 @@
 import React from 'react'
 import Navbar from './Navbar'
 
-const Home = () => {
+const Feed = () => {
   return (
     <div>
-      <Navbar/>
+      FEED
     </div>
   )
 }
 
-export default Home;
+export default Feed;

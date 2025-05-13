@@ -6,6 +6,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 import Login from './components/Login.jsx';
 import { Provider } from 'react-redux';
 import appStore from './utils/appStore.js';
+import Profile from './components/Profile.jsx';
+import Feed from './components/Feed.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 
 const appRouter = createBrowserRouter([
   {
@@ -13,8 +16,24 @@ const appRouter = createBrowserRouter([
     element: <App/>,
     children: [
       {
+        path: "/",
+        element: (
+          <ProtectedRoute> 
+            <Feed/>
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: "login",
         element: <Login/>,
+      },
+      {
+        path: "profile",
+        element: (
+          <ProtectedRoute> 
+            <Profile/>
+          </ProtectedRoute>
+        ),
       },
     ],
   },
