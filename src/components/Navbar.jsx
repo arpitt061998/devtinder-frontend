@@ -44,9 +44,19 @@ const Navbar = () => {
                     tabIndex={0}
                     className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                     <li>
-                    <Link to = "/profile" className="justify-between">
-                      Profile
-                    </Link>
+                      <Link to = "/profile" className="justify-between">
+                        Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to = "/connections" className="justify-between">
+                        Connections
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to = "/requests" className="justify-between">
+                        Requests
+                      </Link>
                     </li>
                     <li><a onClick={handleLogout}>Logout</a></li>
                 </ul>

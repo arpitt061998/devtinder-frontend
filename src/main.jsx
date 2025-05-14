@@ -9,6 +9,8 @@ import appStore from './utils/appStore.js';
 import Profile from './components/Profile.jsx';
 import Feed from './components/Feed.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+import Connections from './components/Connections.jsx';
+import Requests from './components/Requests.jsx';
 
 const appRouter = createBrowserRouter([
   {
@@ -32,6 +34,22 @@ const appRouter = createBrowserRouter([
         element: (
           <ProtectedRoute> 
             <Profile/>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "connections",
+        element: (
+          <ProtectedRoute> 
+            <Connections/>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "requests",
+        element: (
+          <ProtectedRoute> 
+            <Requests/>
           </ProtectedRoute>
         ),
       },
