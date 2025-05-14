@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
 import { BASE_URL } from "../utils/constant";
 import { removeUser } from "../utils/userSlice";
+import { removeFeed } from "../utils/feedSlice";
 
 const Navbar = () => {
   const {user} = useSelector((store) => store.user);
@@ -15,6 +16,7 @@ const Navbar = () => {
         {withCredentials: true}
       )
       dispatch(removeUser());
+      dispatch(removeFeed());
       setTimeout(() => navigate("/login"), 50);
     } catch(err) {
       console.err("Logout failed...")
