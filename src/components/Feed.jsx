@@ -10,11 +10,11 @@ const Feed = () => {
   const dispatch = useDispatch();
   const getFeed = async() => {
     try {
-      const res = await axios.get(`${BASE_URL}/feed`, {
+      const res = await axios.get(`${BASE_URL}/user/feed`, {
         withCredentials: true
       });
-      console.log(res.data[0])
-      dispatch(addFeed(res.data));
+      console.log(res.data.data[0])
+      dispatch(addFeed(res.data.data));
     } catch(err) {
       console.log(err);
     };
@@ -26,15 +26,15 @@ const Feed = () => {
     }
   },[])
 
-
-  return feed?.length > 0 ? (
-    
+  if(!feed) return;
+  if(feed.length ===0) return <div>No new user are avaiable... </div>
+  return (
     <div className="flex justify-center my-4 items-center flex-col">
       {feed.map(user => (
         <UserCard user={user} key={user._id}/>
       ))}
     </div>
-  ) : null;
+  );
 }
 
 

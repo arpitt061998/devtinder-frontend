@@ -11,6 +11,7 @@ import Feed from './components/Feed.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Connections from './components/Connections.jsx';
 import Requests from './components/Requests.jsx';
+import Signup from './components/SIgnup.jsx';
 
 const appRouter = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const appRouter = createBrowserRouter([
       {
         path: "login",
         element: <Login/>,
+      },
+      {
+        path: "signup",
+        element: <Signup/>
       },
       {
         path: "profile",
@@ -58,9 +63,7 @@ const appRouter = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
     <Provider store={appStore}>
       <RouterProvider router={appRouter} />
     </Provider>
-  </StrictMode>,
 )

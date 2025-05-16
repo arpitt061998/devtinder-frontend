@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { BASE_URL } from '../utils/constant';
 
 const Login = () => {
@@ -50,6 +50,7 @@ const Login = () => {
                   />
                 </fieldset>
                 {error && (<p className='text-red-400'>Error logging in</p>)}
+                <p className='text-black cursor-pointer'>New to DevTinder <Link className = "underline"to = "/signup">Sign up</Link> now</p>
                 <div className="card-actions justify-center">
                 <button 
                   className="btn"

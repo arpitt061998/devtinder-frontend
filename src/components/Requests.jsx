@@ -1,12 +1,13 @@
 import axios from 'axios'
 import { BASE_URL } from '../utils/constant'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addRequests } from '../utils/requestsSlice'
-import UserCard from './UserCard'
+import RequestCard from './RequestCard'
 const Requests = () => {
   const dispatch = useDispatch();
   const requests = useSelector(store => store.requests);
+  const [reviewRequest, setReviewRequest] = useState(false);
   const fetchPendingRequests = async() => {
     try {
       const res = await axios.get(`${BASE_URL}/user/requests`, {
@@ -23,15 +24,15 @@ const Requests = () => {
     fetchPendingRequests();
   },[])
 
-  if(!requests) return;
-  if(requests.length === 0) <h1>No pending requests...</h1>
+  if(requests === null) return;
+  if(requests.length === 0) return <h1>No pending requests...</h1>
   return (
     <div className='flex flex-col items-center justify-center my-10'>
       {requests.map(user =>  (
-        <UserCard user = {user.fromUserId} key={user._id}/>
+        <RequestCard user = {user.fromUserId} requestId = {user._id} key={user._id} isRequestCard = {true}/>
       ))}
     </div>
   )
 }
 
-export default Requests
+export default Requests;

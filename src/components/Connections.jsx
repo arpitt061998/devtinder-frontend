@@ -3,7 +3,7 @@ import { BASE_URL } from "../utils/constant"
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/connectionsSlice";
-import UserCard from "./UserCard";
+import RequestCard from "./RequestCard";
 
 const Connections = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const Connections = () => {
   return (
     <div className="flex justify-center items-center my-10 flex-col">
       {connections.map(connection => (
-        <UserCard user={connection} key={connection._id}/>
+        <RequestCard user={connection} key={connection._id} isRequestCard={false}/>
       ))}
     </div>
   )
