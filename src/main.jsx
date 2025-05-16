@@ -11,7 +11,7 @@ import Feed from './components/Feed.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Connections from './components/Connections.jsx';
 import Requests from './components/Requests.jsx';
-import Signup from './components/SIgnup.jsx';
+import Signup from './components/Signup.jsx';
 
 const appRouter = createBrowserRouter([
   {
