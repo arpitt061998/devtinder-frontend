@@ -15,7 +15,7 @@ const Signup = () => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = async() => {
+  const handleSignup = async() => {
     try {
       const res = await axios.post(`${BASE_URL}/signup`, 
         {
@@ -53,7 +53,7 @@ const Signup = () => {
                 <fieldset className="fieldset">
                   <legend className="fieldset-legend">Password</legend>
                   <input 
-                    type="text"
+                    type="password"
                     className="input"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -79,7 +79,7 @@ const Signup = () => {
               </fieldset>
               <fieldset className="fieldset">
                 <legend className="fieldset-legend">Age</legend>
-                <input 
+                <input
                   type="text"
                   className="input"
                   value={age}
@@ -117,9 +117,9 @@ const Signup = () => {
                 <div className="card-actions justify-center">
                 <button 
                   className="btn"
-                  onClick={handleLogin}
+                  onClick={handleSignup}
                 >
-                  Login
+                  Sign up
                 </button>
                 </div>
             </div>
