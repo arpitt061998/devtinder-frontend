@@ -13,7 +13,7 @@ const Connections = () => {
       const res = await axios.get(`${BASE_URL}/user/connections`, {
         withCredentials: true
       });
-      console.log(res.data.data);
+      console.log(res.data.data[0])
       dispatch(addConnections(res.data.data));
     } catch(err) {
       console.error(err);
@@ -29,7 +29,7 @@ const Connections = () => {
   return (
     <div className="flex justify-center items-center my-10 flex-col">
       {connections.map(connection => (
-        <RequestCard user={connection} key={connection._id} isRequestCard={false}/>
+        <RequestCard key={connection._id} user={connection} requestId = {connection._id} isRequestCard={false} isChatAvailable={true}/>
       ))}
     </div>
   )

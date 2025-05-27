@@ -2,8 +2,9 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constant";
 import { useDispatch } from "react-redux";
 import { removeRequests } from "../utils/requestsSlice";
+import { Link } from "react-router";
 
-const RequestCard = ( {user, requestId , isRequestCard = false }) => {
+const RequestCard = ( {user, requestId , isRequestCard = false, isChatAvailable = false }) => {
   const {firstName, lastName, photoUrl, about, gender, age} = user;
   const dispatch = useDispatch();
 
@@ -34,6 +35,11 @@ const RequestCard = ( {user, requestId , isRequestCard = false }) => {
         {isRequestCard && (<div className="card-actions justify-center my-4">
           <button className="btn btn-secondary" onClick={() => reviewRequest("rejected",requestId)}>Reject</button>
           <button className="btn btn-pink" onClick={() => reviewRequest("accepted",requestId)}>Accept</button>
+        </div>)}
+        {isChatAvailable && (<div className="card-actions justify-center my-4">
+          <Link to = {`/chat/${requestId}`}>
+            <button className="btn btn-secondary">Chat</button>
+          </Link>
         </div>)}
       </div>
     </div>

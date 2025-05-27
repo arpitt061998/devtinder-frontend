@@ -15,6 +15,7 @@
 - whitelist your ec2 instance ip on mongo server
 - installed pm2 globally
 - pm2 start npm -- start to run your application in background.
+- pm2 start "npx ts-node src/app.ts" --name devtinder-backend
 - pm2 logs - use for checking logs
 - pm2 stop <process_name> - used for stopping process
 - Enable port :3000 on your aws machine
@@ -52,3 +53,4 @@
 - write code for sesclient
 - write code for sending email.
 
+# payment gateway integration

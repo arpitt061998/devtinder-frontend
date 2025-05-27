@@ -12,6 +12,7 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Connections from './components/Connections.jsx';
 import Requests from './components/Requests.jsx';
 import Signup from './components/Signup.jsx';
+import Chat from './components/Chat.jsx';
 
 const appRouter = createBrowserRouter([
   {
@@ -55,6 +56,14 @@ const appRouter = createBrowserRouter([
         element: (
           <ProtectedRoute> 
             <Requests/>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "chat/:targetUserId",
+        element: (
+          <ProtectedRoute> 
+            <Chat/>
           </ProtectedRoute>
         ),
       },
