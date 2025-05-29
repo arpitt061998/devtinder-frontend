@@ -25,12 +25,16 @@ const Requests = () => {
   },[])
 
   if(requests === null) return;
-  if(requests.length === 0) return <h1>No pending requests...</h1>
+  if(requests.length === 0) return (
+    <div className="flex justify-center items-center bg-pink-300 min-h-[88vh] text-white text-3xl">No Pending Requests ... </div>
+  )
   return (
-    <div className='flex flex-col items-center justify-center my-10'>
+    <div className='flex flex-col items-center justify-center bg-pink-300 min-h-[85vh]'>
+      <div className='my-5'>
       {requests.map(user =>  (
         <RequestCard user = {user.fromUserId} requestId = {user._id} key={user._id} isRequestCard = {true}/>
       ))}
+      </div>
     </div>
   )
 }

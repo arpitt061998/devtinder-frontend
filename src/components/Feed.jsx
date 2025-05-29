@@ -27,7 +27,9 @@ const Feed = () => {
   },[])
 
   if(!feed) return;
-  if(feed.length ===0) return <div>No new user are avaiable... </div>
+  if(feed.length === 0) return (
+    <div className="flex text-white justify-center items-center bg-pink-300 min-h-[88vh] text-3xl">No new user are available... </div>
+  )
   return (
     <div className="flex justify-center items-center flex-col bg-pink-300 min-h-[88vh]">
       <div className="my-4">

@@ -21,7 +21,7 @@ const RequestCard = ( {user, requestId , isRequestCard = false, isChatAvailable 
   }
 
   return (
-    <div className="card bg-base-100 w-96 shadow-sm mb-4">
+    <div className="card bg-neutral-800 w-96 shadow-sm mb-4">
       <figure>
         <img
           src={photoUrl}

@@ -46,8 +46,8 @@ const EditProfile = ({user}) => {
 
   return (
     <>
-    <div className='my-5 flex items-center justify-center'>
-      <div className="card w-96 border-2">
+    <div className='bg-pink-300 flex items-center justify-center min-h-[88vh]'>
+      <div className="card w-96  shadow bg-neutral-800">
         <div className="card-body">
             <div className="card-title flex justify-center">Edit Profile </div>
             <fieldset className="fieldset">
@@ -79,12 +79,10 @@ const EditProfile = ({user}) => {
             </fieldset>
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Gender</legend>
-              <input 
-                type="text"
-                className="input"
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
-              />
+              <select class="select select-accent" value={gender} onChange={(e) => setGender(e.target.value)}>
+                <option>Male</option>
+                <option>Female</option>
+              </select>
             </fieldset>
             <fieldset className="fieldset">
               <legend className="fieldset-legend">PhotoUrl</legend>
@@ -107,7 +105,7 @@ const EditProfile = ({user}) => {
             {error && (<div className="error text-red-400">Error updating the Profile</div>)}
             <div className="card-actions justify-center">
             <button 
-              className="btn"
+              className="btn btn-secondary"
               onClick={saveProfile}
             >
               Save Profile
@@ -127,4 +125,4 @@ const EditProfile = ({user}) => {
   )
 }
 
-export default EditProfile
+export default EditProfile;

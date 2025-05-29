@@ -27,8 +27,8 @@ const Login = () => {
   };
 
   return (
-    <div className='my-5 flex items-center justify-center'>
-        <div className="card w-96 border-2">
+    <div className='flex items-center justify-center bg-pink-300 min-h-[88vh]'>
+        <div className="card w-96 border-2 my-5 bg-neutral-800">
             <div className="card-body">
                 <div className="card-title flex justify-center">Login </div>
                 <fieldset className="fieldset">
@@ -50,10 +50,10 @@ const Login = () => {
                   />
                 </fieldset>
                 {error && (<p className='text-red-400'>Error logging in</p>)}
-                <p className='text-black cursor-pointer'>New to DevTinder <Link className = "underline"to = "/signup">Sign up</Link> now</p>
+                <p className='text-white'>New to DevTinder <Link className = "underline"to = "/signup">Sign up</Link> now</p>
                 <div className="card-actions justify-center">
                 <button 
-                  className="btn"
+                  className="btn btn-secondary"
                   onClick={handleLogin}
                 >
                   Login
