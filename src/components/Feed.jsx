@@ -29,10 +29,12 @@ const Feed = () => {
   if(!feed) return;
   if(feed.length ===0) return <div>No new user are avaiable... </div>
   return (
-    <div className="flex justify-center my-4 items-center flex-col">
-      {feed.map(user => (
-        <UserCard user={user} key={user._id}/>
-      ))}
+    <div className="flex justify-center items-center flex-col bg-pink-300 min-h-[88vh]">
+      <div className="my-4">
+        {feed.map(user => (
+          <UserCard user={user} key={user._id}/>
+        ))}
+      </div>
     </div>
   );
 }
