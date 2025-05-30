@@ -29,8 +29,7 @@ const UserCard = ( {user} ) => {
       <div className="card-body">
         <h2 className="card-title">{firstName + " " + lastName}</h2>
         <p>{about}</p>
-        <p>{age}</p>
-        <p>{gender}</p>
+        <p>{age}, {gender}</p>
         <div className="card-actions justify-center my-4">
           <button className="btn btn-secondary" onClick={() => handleRequest("ignored",_id)}>Ignore</button>
           <button className="btn btn-pink" onClick={() => handleRequest("interested",_id)}>Interested</button>

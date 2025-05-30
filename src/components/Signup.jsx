@@ -96,12 +96,10 @@ const Signup = () => {
 
       <fieldset className="space-y-2">
         <legend className="text-sm font-medium text-white">Gender</legend>
-        <input 
-          type="text"
-          className="input input-bordered w-full"
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-        />
+          <select class="select select-accent w-full" value={gender} onChange={(e) => setGender(e.target.value)}>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
       </fieldset>
 
       <fieldset className="space-y-2">
