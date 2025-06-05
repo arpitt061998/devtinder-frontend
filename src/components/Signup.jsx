@@ -4,139 +4,139 @@ import { Link, useNavigate } from 'react-router';
 import { BASE_URL } from '../utils/constant';
 
 const Signup = () => {
-  const [emailId, setEmailId] = useState("");
-  const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
-  const [photoUrl, setPhotoUrl] = useState("");
-  const [about, setAbout] = useState("");
-  const [error, setError] = useState(false);
+  const [formData, setFormData] = useState({
+    emailId: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    age: "",
+    gender: "",
+    photoUrl: "",
+    about: ""
+  });
+
+  const [errors, setErrors] = useState({});
+  const [apiError, setApiError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("Error signing up. Please try again.")
   const navigate = useNavigate();
 
-  const handleSignup = async() => {
+  const validate = () => {
+    const newErrors = {};
+
+    if (!formData.emailId) newErrors.emailId = "Email is required.";
+    else if (!/\S+@\S+\.\S+/.test(formData.emailId)) newErrors.emailId = "Email format is invalid.";
+
+    if (!formData.password) newErrors.password = "Password is required.";
+    else if (formData.password.length < 6) newErrors.password = "Password must be at least 6 characters.";
+
+    if (!formData.firstName) newErrors.firstName = "First name is required.";
+    if (!formData.lastName) newErrors.lastName = "Last name is required.";
+
+    if (!formData.age) newErrors.age = "Age is required.";
+    else if (parseInt(formData.age) <= 0) newErrors.age = "Age must be a positive number.";
+
+    if (!formData.gender) newErrors.gender = "Gender is required.";
+
+    return newErrors;
+  };
+
+  const handleSignup = async () => {
+    const validationErrors = validate();
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) {
+      return;
+    }
+
     try {
-      const res = await axios.post(`${BASE_URL}/signup`, 
-        {
-          emailId,
-          password,
-          firstName,
-          lastName,
-          age,
-          gender,
-          photoUrl,
-          about
-        },
-        {withCredentials: true});
-      navigate("/login")
-    } catch(err) {
-      setError(true);
-      console.error(err)
+      await axios.post(`${BASE_URL}/signup`, formData, {
+        withCredentials: true,
+      });
+      navigate("/login");
+    } catch (err) {
+      if(err.status === 400 && err.response.data.error === "Duplicate email error") {
+        setErrorMsg(err.response.data.message);
+      }
+      setApiError(true);
+      console.error(err);
     }
   };
 
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   return (
-<div className="min-h-screen flex items-center justify-center bg-pink-300 py-12 px-4">
-  <div className="card max-w-md w-full border border-gray-300 shadow-lg bg-neutral-800">
-    <div className="card-body space-y-5">
-      <h2 className="card-title justify-center text-2xl font-semibold text-white">Sign Up</h2>
+    <div className="min-h-screen flex items-center justify-center bg-pink-300 py-12 px-4">
+      <div className="card max-w-md w-full border border-gray-300 shadow-lg bg-neutral-800">
+        <div className="card-body space-y-5">
+          <h2 className="card-title justify-center text-2xl font-semibold text-white">Sign Up</h2>
 
-      <fieldset className="space-y-2">
-        <legend className="text-sm font-medium text-white">Email</legend>
-        <input 
-          type="email"
-          className="input input-bordered w-full"
-          value={emailId}
-          onChange={(e) => setEmailId(e.target.value)}
-        />
-      </fieldset>
+          {[
+            { label: "Email", name: "emailId", type: "email" },
+            { label: "Password", name: "password", type: "password" },
+            { label: "First Name", name: "firstName", type: "text" },
+            { label: "Last Name", name: "lastName", type: "text" },
+            { label: "Age", name: "age", type: "number" },
+            { label: "Photo URL", name: "photoUrl", type: "text" },
+          ].map(({ label, name, type }) => (
+            <fieldset className="space-y-2" key={name}>
+              <legend className="text-sm font-medium text-white">{label}</legend>
+              <input
+                name={name}
+                type={type}
+                className="input input-bordered w-full"
+                value={formData[name]}
+                onChange={handleChange}
+              />
+              {errors[name] && <p className="text-red-400 text-xs">{errors[name]}</p>}
+            </fieldset>
+          ))}
 
-      <fieldset className="space-y-2">
-        <legend className="text-sm font-medium text-white">Password</legend>
-        <input 
-          type="password"
-          className="input input-bordered w-full"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </fieldset>
+          <fieldset className="space-y-2">
+            <legend className="text-sm font-medium text-white">Gender</legend>
+            <select
+              name="gender"
+              className="select select-accent w-full"
+              value={formData.gender}
+              onChange={handleChange}
+            >
+              <option value="">Select Gender</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+            </select>
+            {errors.gender && <p className="text-red-400 text-xs">{errors.gender}</p>}
+          </fieldset>
 
-      <div className="grid grid-cols-2 gap-4">
-        <fieldset className="space-y-2">
-          <legend className="text-sm font-medium text-white">First Name</legend>
-          <input 
-            type="text"
-            className="input input-bordered w-full"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-        </fieldset>
+          <fieldset className="space-y-2">
+            <legend className="text-sm font-medium text-white">About</legend>
+            <textarea
+              name="about"
+              className="textarea textarea-bordered w-full"
+              rows={3}
+              value={formData.about}
+              onChange={handleChange}
+            />
+          </fieldset>
 
-        <fieldset className="space-y-2">
-          <legend className="text-sm font-medium text-white">Last Name</legend>
-          <input 
-            type="text"
-            className="input input-bordered w-full"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </fieldset>
-      </div>
+          {apiError && (
+            <p className="text-red-500 text-sm text-center">{errorMsg}</p>
+          )}
 
-      <fieldset className="space-y-2">
-        <legend className="text-sm font-medium text-white">Age</legend>
-        <input 
-          type="number"
-          className="input input-bordered w-full"
-          value={age}
-          onChange={(e) => setAge(e.target.value)}
-        />
-      </fieldset>
+          <p className="text-white">
+            Have an account? <Link className="underline" to="/login">Login</Link> now
+          </p>
 
-      <fieldset className="space-y-2">
-        <legend className="text-sm font-medium text-white">Gender</legend>
-          <select class="select select-accent w-full" value={gender} onChange={(e) => setGender(e.target.value)}>
-            <option>Male</option>
-            <option>Female</option>
-          </select>
-      </fieldset>
-
-      <fieldset className="space-y-2">
-        <legend className="text-sm font-medium text-white">Photo URL</legend>
-        <input 
-          type="text"
-          className="input input-bordered w-full"
-          value={photoUrl}
-          onChange={(e) => setPhotoUrl(e.target.value)}
-        />
-      </fieldset>
-
-      <fieldset className="space-y-2">
-        <legend className="text-sm font-medium text-white">About</legend>
-        <textarea 
-          className="textarea textarea-bordered w-full"
-          rows={3}
-          value={about}
-          onChange={(e) => setAbout(e.target.value)}
-        />
-      </fieldset>
-
-      {error && <p className="text-red-500 text-sm text-center">Error signing in</p>}
-      <p className='text-white'>Have an account <Link className = "underline"to = "/login">Login</Link> now</p>
-      <div className="card-actions justify-center">
-        <button 
-          className="btn btn-secondary w-full"
-          onClick={handleSignup}
-        >
-          Sign Up
-        </button>
+          <div className="card-actions justify-center">
+            <button className="btn btn-secondary w-full" onClick={handleSignup}>
+              Sign Up
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-  )
-}
+  );
+};
 
 export default Signup;
