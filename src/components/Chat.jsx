@@ -14,10 +14,18 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const chatContainerRef = useRef(null);
 
+  const getTokenFromCookie = () => {
+    const match = document.cookie.match(/(?:^|;\s*)token=([^;]*)/);
+    return match ? match[1] : null;
+  };
+
+  
   const sendMessage = () => {
     const socket = createSocketConnection();
+    const token = getTokenFromCookie();
+
     socket.emit("sendMessage", {
-      userId, targetUserId, firstName, text: newMessage
+      userId, targetUserId, firstName, text: newMessage, token
     });
     setNewMessage("");
   }
