@@ -31,9 +31,12 @@ const Requests = () => {
   return (
     <div className='flex flex-col items-center justify-center bg-pink-300 min-h-[85vh]'>
       <div className='my-5'>
-      {requests.map(user =>  (
-        <RequestCard user = {user.fromUserId} requestId = {user._id} key={user._id} isRequestCard = {true}/>
-      ))}
+      {requests.map((user) =>  {
+        if(user) {
+          return <RequestCard user = {user.fromUserId} requestId = {user._id} key={user._id} isRequestCard = {true}/>
+        }
+        return null;
+      })}
       </div>
     </div>
   )

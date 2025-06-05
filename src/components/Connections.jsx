@@ -14,7 +14,7 @@ const Connections = () => {
       const res = await axios.get(`${BASE_URL}/user/connections`, {
         withCredentials: true
       });
-      console.log(res.data.data[0])
+      console.log(res.data.data)
       dispatch(addConnections(res.data.data));
     } catch(err) {
       console.error(err);
@@ -32,9 +32,20 @@ const Connections = () => {
   return (
     <div className="flex justify-center items-center bg-pink-300 flex-col min-h-[88vh]">
       <div className="user-listing mt-5">
-        {connections.map(connection => (
-          <RequestCard key={connection?._id} user={connection} requestId = {connection?._id} isRequestCard={false} isChatAvailable={true}/>
-        ))}
+      {connections.map((connection) => {
+        if (connection) {
+          return (
+            <RequestCard
+              key={connection._id}
+              user={connection}
+              requestId={connection._id}
+              isRequestCard={false}
+              isChatAvailable={true}
+            />
+          );
+        }
+        return null;
+      })}
       </div>
     </div>
   )
