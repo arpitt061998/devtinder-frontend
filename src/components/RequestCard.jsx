@@ -8,13 +8,12 @@ const RequestCard = ( {user, requestId , isRequestCard = false, isChatAvailable 
   const {firstName, lastName, photoUrl, about, gender, age} = user;
   const dispatch = useDispatch();
 
-  const reviewRequest = async(status, userId) => {
+  const reviewRequest = async(status, requestId) => {
     try{
-      const res = await axios.post(`${BASE_URL}/request/review/${status}/${userId}`,{},{
+      const res = await axios.post(`${BASE_URL}/request/review/${status}/${requestId}`,{},{
         withCredentials: true
       });
-      dispatch(removeRequests(userId));
-      console.log(res);
+      dispatch(removeRequests(requestId));
     } catch(err) {
       console.error("error accepting/rejecting request")
     }

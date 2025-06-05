@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router";
 import { BASE_URL } from "../utils/constant";
 import { removeUser } from "../utils/userSlice";
 import { removeAllFeed } from "../utils/feedSlice";
+import { removeAllRequests } from "../utils/requestsSlice";
+import { removeConnections } from "../utils/connectionsSlice";
 
 const Navbar = () => {
   const {user} = useSelector((store) => store.user);
@@ -17,6 +19,8 @@ const Navbar = () => {
       )
       dispatch(removeUser());
       dispatch(removeAllFeed());
+      dispatch(removeAllRequests());
+      dispatch(removeConnections());
       setTimeout(() => navigate("/login"), 50);
     } catch(err) {
       console.err("Logout failed...")

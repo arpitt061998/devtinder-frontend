@@ -29,6 +29,12 @@ const Login = () => {
       return;
     }
 
+    if (!password) {
+      setErrorMsg("Password cannot be empty.");
+      setError(true);
+      return;
+    }
+
     try {
       const res = await axios.post(
         `${BASE_URL}/login`,
@@ -60,6 +66,7 @@ const Login = () => {
             <input 
               type="text"
               className="input"
+              placeholder='Enter Email'
               value={emailId}
               onChange={(e) => setEmailId(e.target.value)}
             />
@@ -71,6 +78,7 @@ const Login = () => {
             <input 
               type="password"
               className="input"
+              placeholder='Enter password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
